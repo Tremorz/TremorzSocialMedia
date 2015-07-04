@@ -1,0 +1,10 @@
+C:\Users\BridgetP\Documents\Visual Studio 2013\Projects\GetTweets\GetTweets\bin\Debug\GetTweets.exe.config
+C:\Users\BridgetP\Documents\Visual Studio 2013\Projects\GetTweets\GetTweets\obj\Debug\GetTweets.csprojResolveAssemblyReference.cache
+C:\Users\BridgetP\Documents\Visual Studio 2013\Projects\GetTweets\GetTweets\bin\Debug\GetTweets.exe
+C:\Users\BridgetP\Documents\Visual Studio 2013\Projects\GetTweets\GetTweets\bin\Debug\GetTweets.pdb
+C:\Users\BridgetP\Documents\Visual Studio 2013\Projects\GetTweets\GetTweets\bin\Debug\Newtonsoft.Json.dll
+C:\Users\BridgetP\Documents\Visual Studio 2013\Projects\GetTweets\GetTweets\bin\Debug\Newtonsoft.Json.xml
+C:\Users\BridgetP\Documents\Visual Studio 2013\Projects\GetTweets\GetTweets\obj\Debug\GetTweets.exe
+C:\Users\BridgetP\Documents\Visual Studio 2013\Projects\GetTweets\GetTweets\obj\Debug\GetTweets.pdb
+C:\Users\BridgetP\Documents\Visual Studio 2013\Projects\GetTweets\GetTweets\bin\Debug\Facebook.dll
+C:\Users\BridgetP\Documents\Visual Studio 2013\Projects\GetTweets\GetTweets\bin\Debug\Facebook.xml
