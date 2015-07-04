@@ -14,5 +14,6 @@ namespace GetTweets
     public class FacebookData {
         public string Id {get; set;}
         public string Message { get; set; }
+        public string Updated_Time { get; set; }
     }
 }
