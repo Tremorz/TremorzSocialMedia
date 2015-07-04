@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GetTweets
 {
+    // JSON classes for twitter results
     public class TweetsList
     {
         public List<Tweet> Statuses { get; set; }

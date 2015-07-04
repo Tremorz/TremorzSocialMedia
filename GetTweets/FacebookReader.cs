@@ -19,13 +19,13 @@ namespace GetTweets
         private string db_connection_string = "Data Source=txpxz2472h.database.windows.net;Initial Catalog=TremorzGovHack2015;Database=TremorzGovHack2015;User Id=TremorzAdmin;Password=Tremorz@2015";
 
         // db interactions
-        private string updateDBQuery = @"
-INSERT INTO datadump.FacebookPosts
-	(UpdatedDate, [Message], [Source])
-VALUES ";
+        private string updateDBQuery = @"INSERT INTO datadump.FacebookPosts
+	                                        (UpdatedDate, [Message], [Source])
+                                        VALUES ";
 
         public FacebookReader()
         {
+            // create authenticated client for all calls
             SetAccessToken();
             client = new FacebookClient(accessToken);
         }
@@ -44,12 +44,6 @@ VALUES ";
 
             Dictionary<string,string> dict = JsonConvert.DeserializeObject<Dictionary<string,string>>(result);
             accessToken = dict["access_token"];
-
-            /*
-            /oauth/access_token?
-     client_id={app-id}
-    &client_secret={app-secret}
-    &grant_type=client_credentials*/
         }
 
         private FacebookResult GetData()

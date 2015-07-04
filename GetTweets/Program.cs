@@ -22,18 +22,21 @@ namespace GetTweets
         static void Main(string[] args)
         {
             FacebookReader fb = new FacebookReader();
-            //TwitterReader twitter = new TwitterReader();
+            TwitterReader twitter = new TwitterReader();
+
+            fb.Run();
+            Console.WriteLine("Facebook data loaded. Twitter periodic load commencing. Press ENTER (and wait up to 30 seconds) to stop running.");
 
             bool running = true;
             for (int i = 0; running; i++)
             {
-                fb.Run();
-                //twitter.Run(i);
+                twitter.Run(i);
 
-                Console.WriteLine("Run " + i + " completed");
+                Console.WriteLine("Twitter data updated: Run " + i + " completed");
                 if (Console.KeyAvailable)
                     running = false;
 
+                Thread.Sleep(30000);
             }
             
         }

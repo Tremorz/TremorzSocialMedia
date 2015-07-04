@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GetTweets
 {
+    // JSON types for Facebook results
     class FacebookResult
     {
         public List<FacebookData> Data { get; set; }    

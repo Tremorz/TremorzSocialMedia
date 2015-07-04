@@ -29,29 +29,34 @@ namespace GetTweets
         // twitter interactions
         private string tokenApi = "https://api.twitter.com/oauth2/token";
         private string searchApi = "https://api.twitter.com/1.1/search/tweets.json";
-        private Dictionary<string, string> hashtagsDict = new Dictionary<string, string>();
+
+        // things we're watching
+        // mapping from searchable item to largest id of the last search we ran against that so we can avoid duplicate data (note, still getting duplicates, not sure why.)
+        private Dictionary<string, string> hashtagsDict = new Dictionary<string, string>();     
         private Dictionary<string, string> usersDict = new Dictionary<string, string>();
 
         // db interactions
-        private string updateDBQuery = @"
-INSERT INTO datadump.Tweets 
-	(Username, TweetDate, TweetText, SearchHashtag, Hashtags, RetweetCount, InsertRun)
-VALUES ";
+        private string updateDBQuery = @"INSERT INTO datadump.Tweets 
+	                                        (Username, TweetDate, TweetText, SearchHashtag, Hashtags, RetweetCount, InsertRun)
+                                        VALUES ";
 
         public TwitterReader()
         {
+            // load what we want to watch (hashtags and twitter users)
             hashtagsDict.Add("#Weather", "0");
             usersDict.Add("@metlinkwgtn", "0");
             usersDict.Add("@tranzmetro", "0");
             usersDict.Add("@nzcivildefence", "0");
             usersDict.Add("@nztawgtn", "0");
 
+            // login and get auth token
             SetBearerToken();
         }
 
+
+        // run searches for everything we're watching and load to database
         public void Run(int runInstance)
         {
-            
             // hashtag searches
             Dictionary<string, string> updatedHashtagsDict = new Dictionary<string, string>();
             foreach (KeyValuePair<string, string> hashtag in hashtagsDict)
@@ -113,6 +118,7 @@ VALUES ";
 
         private TweetsList RunSearch(string query, string since_id)
         {
+            // build search string. Note, since_id=0 means first search we've done
             string postBody = "q=";
             if (since_id.Equals("0"))
                 postBody += Uri.EscapeDataString(query);
@@ -120,10 +126,14 @@ VALUES ";
                 postBody += Uri.EscapeDataString(query) + "&since_id=" + since_id;
 
             var resource_url = searchApi + "?" + postBody;
+
+            // build request
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(resource_url);
             request.Headers.Add("Authorization", "Bearer " + bearerToken);
             request.Method = "GET";
             request.ContentType = "*/*";
+
+            // read request and convert to usable objects
             var response = (HttpWebResponse)request.GetResponse();
             var reader = new StreamReader(response.GetResponseStream());
             string json = reader.ReadToEnd();
@@ -134,6 +144,7 @@ VALUES ";
 
         private void WriteToDatabase(string searchHashtag, TweetsList tweets, int insertRun) {
 
+            // write any tweets in tweets to the database
             if (tweets.Statuses.Count == 0)
                 return;
 
